@@ -21,8 +21,8 @@ export function listingImage(item: {
   image_url?: string | null;
 }): string {
   if (item.image_url) return item.image_url;
-  if (item.image_key && imagesByKey[item.image_key]) return imagesByKey[item.image_key];
-  return dressCream;
+  const mapped = item.image_key ? imagesByKey[item.image_key] : undefined;
+  return mapped ?? dressCream;
 }
 
 export function formatPrice(cents: number, currency = "MYR") {

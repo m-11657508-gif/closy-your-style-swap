@@ -102,7 +102,7 @@ function MeasurementsPage() {
     }
     const { error } = await supabase
       .from("measurements")
-      .upsert(payload, { onConflict: "user_id" });
+      .upsert(payload as never, { onConflict: "user_id" });
     setSaving(false);
     if (error) toast.error(error.message);
     else {
