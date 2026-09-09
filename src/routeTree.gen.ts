@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as BrowseRouteImport } from './routes/browse'
+import { Route as ClosetRouteImport } from './routes/closet'
 import { Route as MeasurementsRouteImport } from './routes/measurements'
 import { Route as SellRouteImport } from './routes/sell'
 import { Route as StylistRouteImport } from './routes/stylist'
@@ -30,6 +31,11 @@ const AuthRoute = AuthRouteImport.update({
 const BrowseRoute = BrowseRouteImport.update({
   id: '/browse',
   path: '/browse',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClosetRoute = ClosetRouteImport.update({
+  id: '/closet',
+  path: '/closet',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MeasurementsRoute = MeasurementsRouteImport.update({
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/browse': typeof BrowseRoute
+  '/closet': typeof ClosetRoute
   '/measurements': typeof MeasurementsRoute
   '/sell': typeof SellRoute
   '/stylist': typeof StylistRoute
@@ -66,6 +73,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/browse': typeof BrowseRoute
+  '/closet': typeof ClosetRoute
   '/measurements': typeof MeasurementsRoute
   '/sell': typeof SellRoute
   '/stylist': typeof StylistRoute
@@ -76,6 +84,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/browse': typeof BrowseRoute
+  '/closet': typeof ClosetRoute
   '/measurements': typeof MeasurementsRoute
   '/sell': typeof SellRoute
   '/stylist': typeof StylistRoute
@@ -87,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/browse'
+    | '/closet'
     | '/measurements'
     | '/sell'
     | '/stylist'
@@ -96,6 +106,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/browse'
+    | '/closet'
     | '/measurements'
     | '/sell'
     | '/stylist'
@@ -105,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/browse'
+    | '/closet'
     | '/measurements'
     | '/sell'
     | '/stylist'
@@ -115,6 +127,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
   BrowseRoute: typeof BrowseRoute
+  ClosetRoute: typeof ClosetRoute
   MeasurementsRoute: typeof MeasurementsRoute
   SellRoute: typeof SellRoute
   StylistRoute: typeof StylistRoute
@@ -142,6 +155,13 @@ declare module '@tanstack/react-router' {
       path: '/browse'
       fullPath: '/browse'
       preLoaderRoute: typeof BrowseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/closet': {
+      id: '/closet'
+      path: '/closet'
+      fullPath: '/closet'
+      preLoaderRoute: typeof ClosetRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/measurements': {
@@ -179,6 +199,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
   BrowseRoute: BrowseRoute,
+  ClosetRoute: ClosetRoute,
   MeasurementsRoute: MeasurementsRoute,
   SellRoute: SellRoute,
   StylistRoute: StylistRoute,
